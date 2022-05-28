@@ -5,3 +5,10 @@
     border: none;
     cursor: pointer;
 }
+
+.btn-fab {
+    bottom: 25px;
+    position: fixed;
+    right: 25px;
+    z-index: 999;
+}
