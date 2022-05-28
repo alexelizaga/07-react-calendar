@@ -6,9 +6,16 @@
     cursor: pointer;
 }
 
-.btn-fab {
+.fab-new {
     bottom: 25px;
     position: fixed;
     right: 25px;
+    z-index: 999;
+}
+
+.fab-delete {
+    bottom: 25px;
+    position: fixed;
+    left: 25px;
     z-index: 999;
 }

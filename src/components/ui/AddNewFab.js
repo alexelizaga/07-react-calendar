@@ -7,13 +7,12 @@ export const AddNewFab = () => {
     const dispatch = useDispatch();
 
     const handleClickNew = () => {
-        console.log('Add new event');
         dispatch( uiOpenModal() );
     }
 
     return (
         <button
-            className='btn btn-primary btn-fab btn-fab-mini text-white'
+            className='btn btn-primary fab-new btn-fab btn-fab-mini text-white'
             onClick={ handleClickNew }
         >
             <i className='fas fa-plus'></i>
