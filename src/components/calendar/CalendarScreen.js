@@ -14,6 +14,7 @@ import 'moment/locale/es';
 import { eventClearActiveEvent, eventSetActive, eventStartLoading } from '../../actions/events';
 import { AddNewFab } from '../ui/AddNewFab';
 import { DeleteEventFab } from '../ui/DeleteEventFab';
+import { prepareEventsForCalendar } from '../../helpers/prepareEvents';
 
 
 moment.locale('es');
@@ -24,6 +25,9 @@ export const CalendarScreen = () => {
 
   const dispatch = useDispatch();
   const { events, activeEvent } = useSelector(state => state.calendar);
+  const { uid } = useSelector(state => state.auth);
+
+  const eventos = prepareEventsForCalendar(events);
 
   const [lastView, setLastView] = useState( localStorage.getItem('lastView') || 'month' );
 
@@ -48,9 +52,10 @@ export const CalendarScreen = () => {
     dispatch( eventClearActiveEvent())
   }
 
-  const eventStyleGetter = () => {
+  const eventStyleGetter = ( event ) => {
+    console.log( event );
     const style = {
-      backgroundColor: '#367CF7',
+      backgroundColor: (uid === event.user._id) ? '#367CF7' : '#465660',
       borderRadius: '0px',
       opacity: 0.8,
       display: 'block',
@@ -68,7 +73,7 @@ export const CalendarScreen = () => {
 
       <Calendar
         localizer={localizer}
-        events={events}
+        events={eventos}
         startAccessor="start"
         endAccessor="end"
         messages={ messages }

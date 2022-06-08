@@ -8,6 +8,7 @@ import DateTimePicker from 'react-datetime-picker';
 
 import { uiCloseModal } from '../../actions/ui';
 import { eventStartAddNew, eventClearActiveEvent, eventUpdated } from '../../actions/events';
+import { prepareEventForMongo } from '../../helpers/prepareEvents';
 
 
 const customStyles = {
@@ -102,10 +103,12 @@ export const CalendarModal = () => {
             return;
         }
 
+        const event = prepareEventForMongo( formValues );
+
         if( calendar.activeEvent ) {
-            dispatch( eventUpdated( formValues ) );
+            dispatch( eventUpdated( event ) );
         } else {
-            dispatch( eventStartAddNew( formValues ) );
+            dispatch( eventStartAddNew( event ) );
         }
 
 

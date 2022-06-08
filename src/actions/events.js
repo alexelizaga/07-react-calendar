@@ -1,5 +1,6 @@
-import { fetchWithToken } from "../helpers/fetch";
-import { types } from "../types/types";
+import { fetchWithToken } from '../helpers/fetch';
+import { prepareEventsForMongo } from '../helpers/prepareEvents';
+import { types } from '../types/types';
 
 export const eventStartAddNew = ( event ) => {
     return async( dispatch, getState ) => {
@@ -57,16 +58,17 @@ export const eventStartLoading = () => {
             const resp = await fetchWithToken( 'events' );
             const body = await resp.json();
 
-            const events = body.events;
+            const events = prepareEventsForMongo( body.events );
+            // const events = body.events;
             
             dispatch( eventLoaded( events ) );
         } catch (error) {
             console.log(error);
         }
     }
-}
+};
 
 const eventLoaded = (events) => ({
     type: types.eventLoaded,
     payload: events
-})
+});
