@@ -7,7 +7,7 @@ import Swal from 'sweetalert2'
 import DateTimePicker from 'react-datetime-picker';
 
 import { uiCloseModal } from '../../actions/ui';
-import { eventAddNew, eventClearActiveEvent, eventUpdated } from '../../actions/events';
+import { eventStartAddNew, eventClearActiveEvent, eventUpdated } from '../../actions/events';
 
 
 const customStyles = {
@@ -89,7 +89,6 @@ export const CalendarModal = () => {
         const momentEnd = moment( end );
 
         if ( momentStart.isSameOrAfter( momentEnd ) ) {
-            console.log('Start date must be before end date');
             Swal.fire(
                 'Error',
                 'Fecha fin debe ser mayor a fecha inicio',
@@ -106,14 +105,7 @@ export const CalendarModal = () => {
         if( calendar.activeEvent ) {
             dispatch( eventUpdated( formValues ) );
         } else {
-            dispatch( eventAddNew({
-                ...formValues,
-                id: new Date().getTime(),
-                user: {
-                    _id: '123',
-                    name: 'Alex'
-                }
-            }) );
+            dispatch( eventStartAddNew( formValues ) );
         }
 
 

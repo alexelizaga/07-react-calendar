@@ -44,8 +44,7 @@ export const CalendarScreen = () => {
     dispatch( eventClearActiveEvent())
   }
 
-  const eventStyleGetter = ( event, start, end, isSelected ) => {
-    console.log(event, start, end, isSelected);
+  const eventStyleGetter = () => {
     const style = {
       backgroundColor: '#367CF7',
       borderRadius: '0px',
