@@ -7,8 +7,8 @@ import Swal from 'sweetalert2'
 import DateTimePicker from 'react-datetime-picker';
 
 import { uiCloseModal } from '../../actions/ui';
-import { eventStartAddNew, eventClearActiveEvent, eventUpdated } from '../../actions/events';
-import { prepareEventForMongo } from '../../helpers/prepareEvents';
+import { eventStartAddNew, eventClearActiveEvent, eventStartUpdate } from '../../actions/events';
+import { prepareEventForRedux } from '../../helpers/prepareEvents';
 
 
 const customStyles = {
@@ -103,10 +103,10 @@ export const CalendarModal = () => {
             return;
         }
 
-        const event = prepareEventForMongo( formValues );
+        const event = prepareEventForRedux( formValues );
 
         if( calendar.activeEvent ) {
-            dispatch( eventUpdated( event ) );
+            dispatch( eventStartUpdate( event ) );
         } else {
             dispatch( eventStartAddNew( event ) );
         }

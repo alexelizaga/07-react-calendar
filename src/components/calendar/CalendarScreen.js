@@ -14,7 +14,7 @@ import 'moment/locale/es';
 import { eventClearActiveEvent, eventSetActive, eventStartLoading } from '../../actions/events';
 import { AddNewFab } from '../ui/AddNewFab';
 import { DeleteEventFab } from '../ui/DeleteEventFab';
-import { prepareEventsForCalendar } from '../../helpers/prepareEvents';
+import { prepareEventForRedux, prepareEventsForCalendar } from '../../helpers/prepareEvents';
 
 
 moment.locale('es');
@@ -40,7 +40,8 @@ export const CalendarScreen = () => {
   }
 
   const onSelect = (e) => {
-    dispatch( eventSetActive(e));
+    const event = prepareEventForRedux( e );
+    dispatch( eventSetActive(event));
   }
 
   const onViewChange = (e) => {
@@ -53,7 +54,6 @@ export const CalendarScreen = () => {
   }
 
   const eventStyleGetter = ( event ) => {
-    console.log( event );
     const style = {
       backgroundColor: (uid === event.user._id) ? '#367CF7' : '#465660',
       borderRadius: '0px',
